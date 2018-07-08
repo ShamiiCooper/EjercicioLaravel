@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Editar Cliente')
+@section('title','Facturas')
 
 @section('content')
     <div class="content">
@@ -10,23 +10,23 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Direccion</th>
-                    <th scope="col">Fecha Alta</th>
+                    <th scope="col">Monto Total</th>
+                    <th scope="col">Fecha Emision</th>
+                    <th scope="col">Cliente</th>
                     <th scope="col">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($clientes as $cliente)
+                @foreach($facturas as $factura)
                     <tr>
-                        <td>{{$cliente->id}}</td>
-                        <td>{{$cliente->nombre}}</td>
-                        <td>{{$cliente->direccion}}</td>
-                        <td>{{$cliente->fecha_alta }}</td>
+                        <td>{{$factura->id}}</td>
+                        <td>{{$factura->monto_total}}</td>
+                        <td>{{$factura->fecha_emision}}</td>
+                        <td>{{$factura->cliente_id }}</td>
                         <td>
-                            <a href="/clientes/edit/{{$cliente->id}}" class="btn btn-success" id="client-edit">Editar
+                            <a href="/facturas/edit/{{$factura->id}}" class="btn btn-success">Editar
                             </a>
-                            <a href="/clientes/delete/{{$cliente->id}}" class="btn btn-danger" id="client-delete">Eliminar</a>
+                            <a href="/facturas/delete/{{$factura->id}}" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
                 @endforeach
@@ -36,35 +36,35 @@
     </div>
 
     <div class="col-lg-12">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-new-client">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-new-fact">
             Nuevo
         </button>
 
-        <div class="modal fade" id="modal-new-client" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="modal-new-fact" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nuevo cliente</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nueva factura</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form role="form" action="{{url('/clientes')}}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{url('/facturas')}}" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
-                                <label for="formGroupExampleInput">Nombre</label>
-                                <input type="text" class="form-control" name="nombre" id="name-new-client">
-                            </div>
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Direccion</label>
-                                <input type="text" class="form-control" name="direccion" id="address-new-client">
+                                <label for="formGroupExampleInput">Monto Total</label>
+                                <input type="number" class="form-control" name="monto_total">
                             </div>
 
+                            <div class="form-group">
+                                <label for="formGroupExampleInput2">Cliente</label>
+                                <input type="text" class="form-control" name="cliente_id">
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" id="save-new-client" class="btn btn-primary">Guardar</button>
+                            <button type="submit" id="save-new-fact" class="btn btn-primary">Guardar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
@@ -76,7 +76,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#client-edit').click(function () {
+            $('#fact-edit').click(function () {
                 window.location.href = $(this).data('href');
             });
 

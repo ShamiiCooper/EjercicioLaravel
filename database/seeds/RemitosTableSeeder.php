@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RemitosTableSeeder extends Seeder
 {
@@ -11,13 +12,13 @@ class RemitosTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Remitos::create([
+        DB::table('remitos')->insert([
             'fecha_emision' => Carbon::parse('2018-07-6'),
             'monto_total' => 7600,
             'proveedor_id' => 1,
         ]);
 
-        App\Remitos::create([
+        DB::table('remitos')->insert([
             'fecha_emision' => Carbon::parse('2018-07-6'),
             'monto_total' => 10600,
             'proveedor_id' => 2,

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Clientes;
+use App\Facturas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class ClientesController extends Controller
+class FacturasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $clientes = Clientes::all();
-        return view('layout/clientes/list', array('clientes' => $clientes));
+        $facturas = Facturas::all();
+        return view('layout/facturas/list', array('facturas' => $facturas));
     }
 
     /**
@@ -26,7 +26,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -37,12 +37,13 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        $client = new Clientes();
-        $client->nombre = $request->input('nombre');
-        $client->direccion = $request->input('direccion');
-        $client->fecha_alta = Carbon::now();
-        $client->save();
-        return view('layout/clientes/list', array('clientes' => Clientes::all()));
+        $factura = new Facturas();
+        $factura->monto_total = $request->input('monto_total');
+        $factura->fecha_emision = Carbon::now()->toDateTimeString();
+        $factura->cliente_id = $request->input('cliente_id');
+        $factura->save();
+        return view('layout/facturas/list', array('facturas' => Facturas::all()));
+
     }
 
     /**
@@ -53,8 +54,8 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        $client = Clientes::find($id);
-        return view('layout/clientes/show', array('cliente' => $client));
+        $factura = Facturas::find($id);
+        return view('layout/facturas/show', array('factura' => $factura));
     }
 
     /**
@@ -65,8 +66,9 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-        $client = Clientes::find($id);
-        return view('layout/clientes/edit', array('cliente' => $client));
+        $factura = Facturas::find($id);
+
+        return view('layout/facturas/edit', array('factura' => $factura));
     }
 
     /**
@@ -78,13 +80,12 @@ class ClientesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = Clientes::find($id);
-        $client->nombre = $request->input('nombre');
-        $client->direccion = $request->input('direccion');
-        $client->save();
+        $factura = Facturas::find($id);
+        $factura->monto_total = $request->input('monto_total');
+        $factura->cliente_id = $request->input('cliente_id');
+        $factura->save();
 
-        return view('layout/clientes/show', array('cliente' => $client));
-
+        return view('layout/facturas/show', array('factura' => $factura));
     }
 
     /**
@@ -95,8 +96,7 @@ class ClientesController extends Controller
      */
     public function destroy($id)
     {
-        Clientes::destroy($id);
-        return view('layout/clientes/deleted');
+        Facturas::destroy($id);
+        return view('layout/facturas/deleted');
     }
-
 }

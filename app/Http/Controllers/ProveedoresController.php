@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Clientes;
+use App\Proveedores;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class ClientesController extends Controller
+class ProveedoresController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $clientes = Clientes::all();
-        return view('layout/clientes/list', array('clientes' => $clientes));
+        $facturas = Proveedores::all();
+        return view('layout/proveedores/list', array('proveedores' => $facturas));
     }
 
     /**
@@ -26,7 +26,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -37,12 +37,12 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        $client = new Clientes();
-        $client->nombre = $request->input('nombre');
-        $client->direccion = $request->input('direccion');
-        $client->fecha_alta = Carbon::now();
-        $client->save();
-        return view('layout/clientes/list', array('clientes' => Clientes::all()));
+        $proveedor = new Proveedores;
+        $proveedor->direccion = $request->input('direccion');
+        $proveedor->fecha_alta = Carbon::now()->toDateTimeString();
+        $proveedor->telefono = $request->input('telefono');
+        $proveedor->save();
+        return view('layout/proveedores/list', array('proveedores' => Proveedores::all()));
     }
 
     /**
@@ -53,9 +53,10 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        $client = Clientes::find($id);
-        return view('layout/clientes/show', array('cliente' => $client));
+        $proveedor = Proveedores::find($id);
+        return view('layout/proveedores/show', array('proveedor' => $proveedor));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -65,8 +66,8 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-        $client = Clientes::find($id);
-        return view('layout/clientes/edit', array('cliente' => $client));
+        $proveedor = Proveedores::find($id);
+        return view('layout/proveedores/edit', array('proveedor' => $proveedor));
     }
 
     /**
@@ -78,13 +79,12 @@ class ClientesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = Clientes::find($id);
-        $client->nombre = $request->input('nombre');
-        $client->direccion = $request->input('direccion');
-        $client->save();
+        $proveedor = Proveedores::find($id);
+        $proveedor->direccion = $request->input('direccion');
+        $proveedor->telefono = $request->input('telefono');
+        $proveedor->save();
 
-        return view('layout/clientes/show', array('cliente' => $client));
-
+        return view('layout/proveedores/show', array('proveedor' => $proveedor));
     }
 
     /**
@@ -95,8 +95,7 @@ class ClientesController extends Controller
      */
     public function destroy($id)
     {
-        Clientes::destroy($id);
-        return view('layout/clientes/deleted');
+        Proveedores::destroy($id);
+        return view('layout/proveedores/deleted');
     }
-
 }

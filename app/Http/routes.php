@@ -49,7 +49,7 @@ Route::get('/proveedores/edit/{id}', [
 
 Route::post('/proveedores/show/{id}', 'ProveedoresController@update');
 
-Route::post('/proveedores/', 'ProveedoresControllerController@store');
+Route::post('/proveedores/', 'ProveedoresController@store');
 
 
 // REMITOS //

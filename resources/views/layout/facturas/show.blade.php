@@ -8,17 +8,17 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Direccion</th>
-                    <th scope="col">Fecha Alta</th>
+                    <th scope="col">Monto Total</th>
+                    <th scope="col">Fecha Emision</th>
+                    <th scope="col">Cliente</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>{{$cliente->id}}</td>
-                    <td>{{$cliente->nombre}}</td>
-                    <td>{{$cliente->direccion}}</td>
-                    <td>{{$cliente->fecha_alta }}</td>
+                    <td>{{$factura->id}}</td>
+                    <td>{{$factura->monto_total}}</td>
+                    <td>{{$factura->fecha_emision}}</td>
+                    <td>{{$factura->cliente_id }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -32,7 +32,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#back').click(function () {
-                window.location.href = '{{url("/clientes")}}';
+                window.location.href = '{{url("/facturas")}}';
             });
         });
     </script>

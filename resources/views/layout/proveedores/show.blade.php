@@ -8,17 +8,17 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
                     <th scope="col">Direccion</th>
+                    <th scope="col">Telefono</th>
                     <th scope="col">Fecha Alta</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>{{$cliente->id}}</td>
-                    <td>{{$cliente->nombre}}</td>
-                    <td>{{$cliente->direccion}}</td>
-                    <td>{{$cliente->fecha_alta }}</td>
+                    <td>{{$proveedor->id}}</td>
+                    <td>{{$proveedor->direccion}}</td>
+                    <td>{{$proveedor->telefono}}</td>
+                    <td>{{$proveedor->fecha_alta }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -32,7 +32,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#back').click(function () {
-                window.location.href = '{{url("/clientes")}}';
+                window.location.href = '{{url("/proveedores")}}';
             });
         });
     </script>
